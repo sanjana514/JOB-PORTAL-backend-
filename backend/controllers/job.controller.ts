@@ -1,4 +1,4 @@
-import { Job } from "../models/job.model.ts";
+import { Job } from "../models/job.model";
 import { Request, Response } from "express";
 
 interface RequestWithId extends Request {

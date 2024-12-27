@@ -1,8 +1,8 @@
-import { User } from "../models/user.model.ts";
+import { User } from "../models/user.model";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import getDataUri from "../utils/datauri.ts";
-import cloudinary from "../utils/cloudinary.ts";
+import getDataUri from "../utils/datauri";
+import cloudinary from "../utils/cloudinary";
 import { Request, Response } from "express";
 
 interface RequestWithId extends Request {

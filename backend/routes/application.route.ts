@@ -1,5 +1,5 @@
 import express from "express";
-import isAuthenticated from "../middlewares/isAuthenticated.ts";
+import isAuthenticated from "../middlewares/isAuthenticated";
 import {
   applyJob,
   getApplicants,

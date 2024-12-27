@@ -1,4 +1,4 @@
-import DataUriParser from "datauri/parser.js";
+import DataUriParser from "datauri/parser";
 import path from "path";
 
 const getDataUri = (file: any) => {

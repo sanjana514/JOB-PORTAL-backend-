@@ -1,5 +1,5 @@
-import { Application } from "../models/application.model.ts";
-import { Job } from "../models/job.model.ts";
+import { Application } from "../models/application.model";
+import { Job } from "../models/job.model";
 import { Request, Response } from "express";
 
 interface RequestWithId extends Request {
@@ -126,7 +126,6 @@ export const updateStatus = async (
       });
     }
 
-    // find the application by applicantion id
     const application = await Application.findOne({ _id: applicationId });
     if (!application) {
       return res.status(404).json({

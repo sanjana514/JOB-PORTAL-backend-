@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs" /* Allow 'import x from y' when a module doesn't have a default export. */,
-    "esModuleInterop": true /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true /* Skip type checking .d.ts files that are included with TypeScript. */,
+    "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "module": "commonjs",
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+    // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+
+    /* Type Checking */
+    "strict": true /* Enable all strict type-checking options. */,
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
-    "outDir": "./dist",
-    "noEmit": true,
-    "allowImportingTsExtensions": true
-    // "noImplicitAny": true,
+    "outDir": "dist" /* Redirect output structure to the directory. */
   }
 }

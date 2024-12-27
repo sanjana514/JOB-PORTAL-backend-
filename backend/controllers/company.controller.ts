@@ -1,6 +1,6 @@
-import { Company } from "../models/company.model.ts";
-import getDataUri from "../utils/datauri.ts";
-import cloudinary from "../utils/cloudinary.ts";
+import { Company } from "../models/company.model";
+import getDataUri from "../utils/datauri";
+import cloudinary from "../utils/cloudinary";
 import { Request, Response } from "express";
 
 interface RequestWithId extends Request {
