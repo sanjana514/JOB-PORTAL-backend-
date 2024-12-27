@@ -1,7 +1,12 @@
 import { Application } from "../models/application.model.ts";
 import { Job } from "../models/job.model.ts";
+import { Request, Response } from "express";
 
-export const applyJob = async (req, res) => {
+interface RequestWithId extends Request {
+  id?: string;
+}
+
+export const applyJob = async (req: Request, res: Response) => {
   try {
     const userId = req.body.id;
     const jobId = req.params.id;
@@ -48,7 +53,7 @@ export const applyJob = async (req, res) => {
     console.log(error);
   }
 };
-export const getAppliedJobs = async (req, res) => {
+export const getAppliedJobs = async (req: RequestWithId, res: Response) => {
   try {
     const userId = req.id;
     const application = await Application.find({ applicant: userId })
@@ -76,7 +81,7 @@ export const getAppliedJobs = async (req, res) => {
   }
 };
 // admin dekhega kitna user ne apply kiya hai
-export const getApplicants = async (req, res) => {
+export const getApplicants = async (req: Request, res: Response) => {
   try {
     const jobId = req.params.id;
     const job = await Job.findById(jobId).populate({
@@ -100,7 +105,7 @@ export const getApplicants = async (req, res) => {
     console.log(error);
   }
 };
-export const updateStatus = async (req, res) => {
+export const updateStatus = async (req: Request, res: Response) => {
   try {
     const { status } = req.body;
     const applicationId = req.params.id;

@@ -1,8 +1,13 @@
 import { Company } from "../models/company.model.ts";
 import getDataUri from "../utils/datauri.ts";
 import cloudinary from "../utils/cloudinary.ts";
+import { Request, Response } from "express";
 
-export const registerCompany = async (req, res) => {
+interface RequestWithId extends Request {
+  id?: string;
+}
+
+export const registerCompany = async (req: RequestWithId, res: Response) => {
   //create company
   try {
     const { companyName } = req.body;
@@ -33,7 +38,7 @@ export const registerCompany = async (req, res) => {
     console.log(error);
   }
 };
-export const getCompany = async (req, res) => {
+export const getCompany = async (req: RequestWithId, res: Response) => {
   try {
     const userId = req.id; // logged in user id
     const companies = await Company.find({ userId });
@@ -52,7 +57,7 @@ export const getCompany = async (req, res) => {
   }
 };
 // get company by id
-export const getCompanyById = async (req, res) => {
+export const getCompanyById = async (req: Request, res: Response) => {
   try {
     const companyId = req.params.id;
     const company = await Company.findById(companyId);
@@ -70,13 +75,19 @@ export const getCompanyById = async (req, res) => {
     console.log(error);
   }
 };
-export const updateCompany = async (req, res) => {
+export const updateCompany = async (req: Request, res: Response) => {
   try {
     const { name, description, website, location } = req.body;
 
     const file = req.file;
-    // idhar cloudinary ayega
+    // Cloudinary upload
     const fileUri = getDataUri(file);
+    if (!fileUri.content) {
+      return res.status(400).json({
+        message: "File content is required.",
+        success: false,
+      });
+    }
     const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
     const logo = cloudResponse.secure_url;
 

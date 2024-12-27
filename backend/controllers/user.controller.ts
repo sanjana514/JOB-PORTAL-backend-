@@ -3,8 +3,13 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import getDataUri from "../utils/datauri.ts";
 import cloudinary from "../utils/cloudinary.ts";
+import { Request, Response } from "express";
 
-export const register = async (req, res) => {
+interface RequestWithId extends Request {
+  id?: string;
+}
+
+export const register = async (req: Request, res: Response) => {
   try {
     const { fullname, email, phoneNumber, password, role } = req.body;
 
@@ -46,7 +51,7 @@ export const register = async (req, res) => {
     console.log(error);
   }
 };
-export const login = async (req, res) => {
+export const login = async (req: Request, res: Response) => {
   try {
     const { email, password, role } = req.body;
 
@@ -81,37 +86,32 @@ export const login = async (req, res) => {
     const tokenData = {
       userId: user._id,
     };
+    if (!process.env.SECRET_KEY) {
+      throw new Error("SECRET_KEY is not defined");
+    }
     const token = await jwt.sign(tokenData, process.env.SECRET_KEY, {
       expiresIn: "1hr",
     });
 
-    user = {
-      _id: user._id,
-      fullname: user.fullname,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      role: user.role,
-      profile: user.profile,
-      token: token,
-    };
+    user.token = token;
 
     return res
       .status(200)
       .cookie("token", token, {
         maxAge: 60 * 60 * 1000,
-        httpsOnly: true,
+        httpOnly: true,
         sameSite: "strict",
       })
       .json({
         message: `Welcome back ${user.fullname}`,
-        user,
+        user: user.toObject(),
         success: true,
       });
   } catch (error) {
     console.log(error);
   }
 };
-export const logout = async (res) => {
+export const logout = async (res: Response) => {
   try {
     return res.status(200).cookie("token", "", { maxAge: 0 }).json({
       message: "Logged out successfully.",
@@ -121,13 +121,25 @@ export const logout = async (res) => {
     console.log(error);
   }
 };
-export const updateProfile = async (req, res) => {
+export const updateProfile = async (req: RequestWithId, res: Response) => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
 
     const file = req.file;
     // cloudinary ayega idhar
+    if (!file) {
+      return res.status(400).json({
+        message: "File is missing",
+        success: false,
+      });
+    }
     const fileUri = getDataUri(file);
+    if (!fileUri.content) {
+      return res.status(400).json({
+        message: "File content is missing",
+        success: false,
+      });
+    }
     const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
     let skillsArray;
@@ -147,29 +159,42 @@ export const updateProfile = async (req, res) => {
     if (fullname) user.fullname = fullname;
     if (email) user.email = email;
     if (phoneNumber) user.phoneNumber = phoneNumber;
-    if (bio) user.profile.bio = bio;
-    if (skills) user.profile.skills = skillsArray;
+    if (bio) {
+      if (!user.profile) {
+        user.profile = {
+          skills: [],
+          profilePhoto: "",
+        };
+      }
+      user.profile.bio = bio;
+    }
+    if (skills) {
+      if (!user.profile) {
+        user.profile = {
+          skills: [],
+          profilePhoto: "",
+        };
+      }
+      user.profile.skills = skillsArray;
+    }
 
     // resume comes later here...
     if (cloudResponse) {
+      if (!user.profile) {
+        user.profile = {
+          skills: [],
+          profilePhoto: "",
+        };
+      }
       user.profile.resume = cloudResponse.secure_url; // save the cloudinary url
       user.profile.resumeOriginalName = file.originalname; // Save the original file name
     }
 
     await user.save();
 
-    user = {
-      _id: user._id,
-      fullname: user.fullname,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      role: user.role,
-      profile: user.profile,
-    };
-
     return res.status(200).json({
       message: "Profile updated successfully.",
-      user,
+      user: user.toObject(),
       success: true,
     });
   } catch (error) {
