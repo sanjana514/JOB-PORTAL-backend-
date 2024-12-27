@@ -6,7 +6,10 @@ interface RequestWithId extends Request {
 }
 
 // admin post krega job
-export const postJob = async (req: RequestWithId, res: Response) => {
+export const postJob = async (
+  req: RequestWithId,
+  res: Response
+): Promise<any> => {
   try {
     const {
       title,
@@ -58,8 +61,8 @@ export const postJob = async (req: RequestWithId, res: Response) => {
     console.log(error);
   }
 };
-// student k liye
-export const getAllJobs = async (req: Request, res: Response) => {
+
+export const getAllJobs = async (req: Request, res: Response): Promise<any> => {
   try {
     const keyword = req.query.keyword || "";
     const query = {
@@ -87,8 +90,8 @@ export const getAllJobs = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-// student
-export const getJobById = async (req: Request, res: Response) => {
+
+export const getJobById = async (req: Request, res: Response): Promise<any> => {
   try {
     const jobId = req.params.id;
     const job = await Job.findById(jobId).populate({
@@ -105,8 +108,11 @@ export const getJobById = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-// admin kitne job create kra hai abhi tk
-export const getAdminJobs = async (req: RequestWithId, res: Response) => {
+
+export const getAdminJobs = async (
+  req: RequestWithId,
+  res: Response
+): Promise<any> => {
   try {
     const adminId = req.id;
     const jobs = await Job.find({ created_by: adminId })

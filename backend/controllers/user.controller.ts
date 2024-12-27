@@ -9,7 +9,7 @@ interface RequestWithId extends Request {
   id?: string;
 }
 
-export const register = async (req: Request, res: Response) => {
+export const register = async (req: Request, res: Response): Promise<any> => {
   try {
     const { fullname, email, phoneNumber, password, role } = req.body;
 
@@ -51,7 +51,7 @@ export const register = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<any> => {
   try {
     const { email, password, role } = req.body;
 
@@ -111,7 +111,7 @@ export const login = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-export const logout = async (res: Response) => {
+export const logout = async (res: Response): Promise<any> => {
   try {
     return res.status(200).cookie("token", "", { maxAge: 0 }).json({
       message: "Logged out successfully.",
@@ -121,7 +121,10 @@ export const logout = async (res: Response) => {
     console.log(error);
   }
 };
-export const updateProfile = async (req: RequestWithId, res: Response) => {
+export const updateProfile = async (
+  req: RequestWithId,
+  res: Response
+): Promise<any> => {
   try {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
 
@@ -142,7 +145,7 @@ export const updateProfile = async (req: RequestWithId, res: Response) => {
     }
     const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
-    let skillsArray;
+    let skillsArray: string[] = [];
     if (skills) {
       skillsArray = skills.split(",");
     }
@@ -155,7 +158,7 @@ export const updateProfile = async (req: RequestWithId, res: Response) => {
         success: false,
       });
     }
-    // updating data
+
     if (fullname) user.fullname = fullname;
     if (email) user.email = email;
     if (phoneNumber) user.phoneNumber = phoneNumber;
@@ -178,7 +181,6 @@ export const updateProfile = async (req: RequestWithId, res: Response) => {
       user.profile.skills = skillsArray;
     }
 
-    // resume comes later here...
     if (cloudResponse) {
       if (!user.profile) {
         user.profile = {

@@ -7,7 +7,10 @@ interface RequestWithId extends Request {
   id?: string;
 }
 
-export const registerCompany = async (req: RequestWithId, res: Response) => {
+export const registerCompany = async (
+  req: RequestWithId,
+  res: Response
+): Promise<any> => {
   //create company
   try {
     const { companyName } = req.body;
@@ -38,7 +41,10 @@ export const registerCompany = async (req: RequestWithId, res: Response) => {
     console.log(error);
   }
 };
-export const getCompany = async (req: RequestWithId, res: Response) => {
+export const getCompany = async (
+  req: RequestWithId,
+  res: Response
+): Promise<any> => {
   try {
     const userId = req.id; // logged in user id
     const companies = await Company.find({ userId });
@@ -56,8 +62,11 @@ export const getCompany = async (req: RequestWithId, res: Response) => {
     console.log(error);
   }
 };
-// get company by id
-export const getCompanyById = async (req: Request, res: Response) => {
+
+export const getCompanyById = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   try {
     const companyId = req.params.id;
     const company = await Company.findById(companyId);
@@ -75,7 +84,11 @@ export const getCompanyById = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-export const updateCompany = async (req: Request, res: Response) => {
+
+export const updateCompany = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   try {
     const { name, description, website, location } = req.body;
 

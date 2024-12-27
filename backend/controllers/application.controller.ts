@@ -6,7 +6,7 @@ interface RequestWithId extends Request {
   id?: string;
 }
 
-export const applyJob = async (req: Request, res: Response) => {
+export const applyJob = async (req: Request, res: Response): Promise<any> => {
   try {
     const userId = req.body.id;
     const jobId = req.params.id;
@@ -53,7 +53,10 @@ export const applyJob = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-export const getAppliedJobs = async (req: RequestWithId, res: Response) => {
+export const getAppliedJobs = async (
+  req: RequestWithId,
+  res: Response
+): Promise<any> => {
   try {
     const userId = req.id;
     const application = await Application.find({ applicant: userId })
@@ -80,8 +83,11 @@ export const getAppliedJobs = async (req: RequestWithId, res: Response) => {
     console.log(error);
   }
 };
-// admin dekhega kitna user ne apply kiya hai
-export const getApplicants = async (req: Request, res: Response) => {
+
+export const getApplicants = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   try {
     const jobId = req.params.id;
     const job = await Job.findById(jobId).populate({
@@ -105,7 +111,11 @@ export const getApplicants = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-export const updateStatus = async (req: Request, res: Response) => {
+
+export const updateStatus = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
   try {
     const { status } = req.body;
     const applicationId = req.params.id;
