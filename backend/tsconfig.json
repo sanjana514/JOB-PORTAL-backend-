@@ -4,11 +4,11 @@
     "module": "commonjs" /* Allow 'import x from y' when a module doesn't have a default export. */,
     "esModuleInterop": true /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */,
     "forceConsistentCasingInFileNames": true,
-    "strict": true /* Skip type checking .d.ts files that are included with TypeScript. */,
+    "strict": false /* Skip type checking .d.ts files that are included with TypeScript. */,
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "outDir": "./dist",
     "noEmit": true,
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": true
     // "noImplicitAny": true,
   }
 }
