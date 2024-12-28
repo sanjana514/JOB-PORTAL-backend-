@@ -13,7 +13,7 @@ export const registerCompany = async (
 ): Promise<any> => {
   //create company
   try {
-    const { companyName } = req.body;
+    const { companyName, userId } = req.body;
     if (!companyName) {
       return res.status(400).json({
         message: "Company name is required.",
@@ -29,7 +29,7 @@ export const registerCompany = async (
     }
     company = await Company.create({
       name: companyName,
-      userId: req.id,
+      userId: userId,
     });
 
     return res.status(201).json({
