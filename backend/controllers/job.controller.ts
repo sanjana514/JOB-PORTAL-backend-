@@ -22,8 +22,9 @@ export const postJob = async (
       position,
       companyId,
     } = req.body;
+    // console.log(req);
     // user id will be taken from the token
-    const userId = req.id;
+    const userId = req.headers["userId"];
 
     if (
       !title ||
