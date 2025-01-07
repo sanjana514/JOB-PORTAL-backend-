@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import getDataUri from "../utils/datauri";
 import cloudinary from "../utils/cloudinary";
 import { Request, Response } from "express";
+import bcryptjs from "bcryptjs";
 
 interface RequestWithId extends Request {
   id?: string;
@@ -20,8 +21,14 @@ export const register = async (req: Request, res: Response): Promise<any> => {
       });
     }
     const file = req.file;
-    // const fileUri = getDataUri(file);
-    // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+    const fileUri = getDataUri(file);
+    if (!fileUri.content) {
+      return res.status(400).json({
+        message: "File content is missing",
+        success: false,
+      });
+    }
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
     const user = await User.findOne({ email });
     if (user) {
@@ -38,9 +45,9 @@ export const register = async (req: Request, res: Response): Promise<any> => {
       phoneNumber,
       password: hashedPassword,
       role,
-      // profile:{
-      //     profilePhoto:cloudResponse.secure_url,
-      // }
+      profile: {
+        profilePhoto: cloudResponse.secure_url,
+      },
     });
 
     return res.status(201).json({
@@ -102,6 +109,11 @@ export const login = async (req: Request, res: Response): Promise<any> => {
         httpOnly: true,
         sameSite: "strict",
       })
+      .cookie("userId", user._id.toString(), {
+        maxAge: 60 * 60 * 1000,
+        httpOnly: true, // Set to true if you want it to be accessible only by the server
+        sameSite: "strict",
+      })
       .json({
         message: `Welcome back ${user.fullname}`,
         user: user.toObject(),
@@ -111,16 +123,22 @@ export const login = async (req: Request, res: Response): Promise<any> => {
     console.log(error);
   }
 };
-export const logout = async (res: Response): Promise<any> => {
+
+export const logout = async (req: Request, res: Response): Promise<any> => {
   try {
     return res.status(200).cookie("token", "", { maxAge: 0 }).json({
       message: "Logged out successfully.",
       success: true,
     });
   } catch (error) {
-    console.log(error);
+    console.error("Logout Error:", error); // Log the error
+    return res.status(500).json({
+      message: "Could not log out",
+      success: false,
+    });
   }
 };
+
 export const updateProfile = async (
   req: RequestWithId,
   res: Response
@@ -129,7 +147,7 @@ export const updateProfile = async (
     const { fullname, email, phoneNumber, bio, skills } = req.body;
 
     const file = req.file;
-    // cloudinary ayega idhar
+    // Cloudinary
     if (!file) {
       return res.status(400).json({
         message: "File is missing",

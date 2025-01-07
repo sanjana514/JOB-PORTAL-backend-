@@ -13,7 +13,9 @@ export const registerCompany = async (
 ): Promise<any> => {
   //create company
   try {
-    const { companyName, userId } = req.body;
+    const { companyName } = req.body;
+    // take user id from token in appplication used for authentication, used JWT token
+    const userId = req.cookies.userId;
     if (!companyName) {
       return res.status(400).json({
         message: "Company name is required.",
@@ -46,7 +48,7 @@ export const getCompany = async (
   res: Response
 ): Promise<any> => {
   try {
-    const userId = req.id; // logged in user id
+    const userId = req.cookies.userId;
     const companies = await Company.find({ userId });
     if (!companies) {
       return res.status(404).json({

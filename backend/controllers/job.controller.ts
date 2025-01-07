@@ -5,7 +5,6 @@ interface RequestWithId extends Request {
   id?: string;
 }
 
-// admin post krega job
 export const postJob = async (
   req: RequestWithId,
   res: Response
