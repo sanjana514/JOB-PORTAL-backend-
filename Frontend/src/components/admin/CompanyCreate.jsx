@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../shared/Navbar";
+import Footer from "../shared/Footer";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -71,6 +72,7 @@ const CompanyCreate = () => {
           <Button onClick={registerNewCompany}>Continue</Button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

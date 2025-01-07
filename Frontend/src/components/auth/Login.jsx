@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../shared/Navbar";
+import Footer from "../shared/Footer";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { RadioGroup } from "../ui/radio-group";
@@ -65,7 +66,7 @@ const Login = () => {
     }
   }, []);
   return (
-    <div>
+    <div flex flex-col h-screen justify-between>
       <Navbar />
       <div className="flex items-center justify-center max-w-7xl mx-auto">
         <form
@@ -138,6 +139,7 @@ const Login = () => {
           </span>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };
