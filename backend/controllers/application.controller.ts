@@ -8,7 +8,7 @@ interface RequestWithId extends Request {
 
 export const applyJob = async (req: Request, res: Response): Promise<any> => {
   try {
-    const userId = req.body.id;
+    const userId = req.cookies.userId;
     const jobId = req.params.id;
     if (!jobId) {
       return res.status(400).json({
@@ -58,7 +58,7 @@ export const getAppliedJobs = async (
   res: Response
 ): Promise<any> => {
   try {
-    const userId = req.id;
+    const userId = req.cookies.userId;
     const application = await Application.find({ applicant: userId })
       .sort({ createdAt: -1 })
       .populate({

@@ -23,7 +23,7 @@ export const postJob = async (
     } = req.body;
     // console.log(req);
     // user id will be taken from the token
-    const userId = req.headers["userId"];
+    const userId = req.cookies.userId;
 
     if (
       !title ||
@@ -115,7 +115,7 @@ export const getAdminJobs = async (
   res: Response
 ): Promise<any> => {
   try {
-    const adminId = req.id;
+    const adminId = req.cookies.userId;
     const jobs = await Job.find({ created_by: adminId })
       .populate({
         path: "company",

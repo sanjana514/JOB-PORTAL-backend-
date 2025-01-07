@@ -1,59 +1,58 @@
-import React, { useEffect, useState } from 'react'
-import { RadioGroup, RadioGroupItem } from './ui/radio-group'
-import { Label } from './ui/label'
-import { useDispatch } from 'react-redux'
-import { setSearchedQuery } from '@/redux/jobSlice'
-
-const fitlerData = [
-    {
-        fitlerType: "Location",
-        array: ["Delhi NCR", "Bangalore", "Hyderabad", "Pune", "Mumbai"]
-    },
-    {
-        fitlerType: "Industry",
-        array: ["Frontend Developer", "Backend Developer", "FullStack Developer"]
-    },
-    {
-        fitlerType: "Salary",
-        array: ["0-40k", "42-1lakh", "1lakh to 5lakh"]
-    },
-]
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSearchedQuery } from "@/redux/jobSlice"; // Adjust the import path as needed
+import { use } from "react";
 
 const FilterCard = () => {
-    const [selectedValue, setSelectedValue] = useState('');
-    const dispatch = useDispatch();
-    const changeHandler = (value) => {
-        setSelectedValue(value);
-    }
-    useEffect(()=>{
-        dispatch(setSearchedQuery(selectedValue));
-    },[selectedValue]);
-    return (
-        <div className='w-full bg-white p-3 rounded-md'>
-            <h1 className='font-bold text-lg'>Filter Jobs</h1>
-            <hr className='mt-3' />
-            <RadioGroup value={selectedValue} onValueChange={changeHandler}>
-                {
-                    fitlerData.map((data, index) => (
-                        <div>
-                            <h1 className='font-bold text-lg'>{data.fitlerType}</h1>
-                            {
-                                data.array.map((item, idx) => {
-                                    const itemId = `id${index}-${idx}`
-                                    return (
-                                        <div className='flex items-center space-x-2 my-2'>
-                                            <RadioGroupItem value={item} id={itemId} />
-                                            <Label htmlFor={itemId}>{item}</Label>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    ))
-                }
-            </RadioGroup>
-        </div>
-    )
-}
+  const dispatch = useDispatch();
+  const [selectedValue, setSelectedValue] = useState("");
+  const [location, setLocation] = useState("");
+  const [industry, setIndustry] = useState("");
 
-export default FilterCard
+  useEffect(() => {
+    dispatch(setSearchedQuery(selectedValue));
+  }, [selectedValue, dispatch]);
+
+  useEffect(() => {
+    dispatch(setSearchedQuery(location));
+  }, [location]);
+
+  useEffect(() => {
+    dispatch(setSearchedQuery(industry));
+  }, [industry]);
+
+  console.log("location:", location); // Log the selected value
+
+  return (
+    <div className="w-full bg-white p-3 rounded-md">
+      <h1 className="font-bold text-lg">Filter Jobs</h1>
+      <hr className="mt-3" />
+      <div className="mt-3">
+        <label className="block text-sm font-medium text-gray-700">
+          Location
+        </label>
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+          placeholder="Enter location"
+        />
+      </div>
+      <div className="mt-3">
+        <label className="block text-sm font-medium text-gray-700">
+          Industry
+        </label>
+        <input
+          type="text"
+          value={industry}
+          onChange={(e) => setIndustry(e.target.value)}
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+          placeholder="Enter industry"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default FilterCard;

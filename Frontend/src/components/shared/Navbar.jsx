@@ -37,11 +37,11 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" shadow-md sticky top-0 z-50">
+    <div className="shadow-md top-0 z-50">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
         <div>
-          <h1 className="text-2xl font-bold">
-            Career<span className="text-[#F83002]">Hive</span>
+          <h1 className="text-2xl font-bold" onClick={() => navigate("/")}>
+            Career<span className="text-[#6A38C2]">Hive</span>
           </h1>
         </div>
         <div className="flex items-center gap-12">
