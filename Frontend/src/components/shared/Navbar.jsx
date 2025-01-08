@@ -37,7 +37,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="shadow-md top-0 z-50">
+    <div className="shadow-md top-0 z-50 bg-white">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
         <div>
           <h1 className="text-2xl font-bold" onClick={() => navigate("/")}>
@@ -93,7 +93,13 @@ const Navbar = () => {
               <PopoverContent className="w-80">
                 <div className="">
                   <div className="flex gap-2 space-y-2">
-                    <Avatar className="cursor-pointer">
+                    <Avatar
+                      className="cursor-pointer
+                      h-8
+                      w-8
+                      border-rounded-full
+                      border-gray-500 "
+                    >
                       <AvatarImage
                         src={user?.profile?.profilePhoto}
                         alt="@shadcn"
