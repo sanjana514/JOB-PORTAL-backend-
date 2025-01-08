@@ -67,7 +67,7 @@ const JobDescription = () => {
   }, [jobId, dispatch, user?._id]);
 
   return (
-    <div flex flex-col h-screen justify-between>
+    <div flex flex-col h-screen>
       <Navbar />
       <div className="max-w-7xl mx-auto my-10">
         <div className="flex items-center justify-between">
@@ -122,7 +122,7 @@ const JobDescription = () => {
           <h1 className="font-bold my-1">
             Experience:{" "}
             <span className="pl-4 font-normal text-gray-800">
-              {singleJob?.experience} yrs
+              {singleJob?.experienceLevel} yrs
             </span>
           </h1>
           <h1 className="font-bold my-1">
