@@ -81,7 +81,7 @@ const JobDescription = () => {
                 {singleJob?.jobType}
               </Badge>
               <Badge className={"text-[#7209b7] font-bold"} variant="ghost">
-                {singleJob?.salary}LPA
+                ${singleJob?.salary}
               </Badge>
             </div>
           </div>
@@ -128,7 +128,7 @@ const JobDescription = () => {
           <h1 className="font-bold my-1">
             Salary:{" "}
             <span className="pl-4 font-normal text-gray-800">
-              {singleJob?.salary}LPA
+              ${singleJob?.salary}
             </span>
           </h1>
           <h1 className="font-bold my-1">

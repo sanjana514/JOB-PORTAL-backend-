@@ -11,7 +11,7 @@ const LatestJobCards = ({ job }) => {
     >
       <div>
         <h1 className="font-medium text-lg">{job?.company?.name}</h1>
-        <p className="text-sm text-gray-500">India</p>
+        <p className="text-sm text-gray-500">{job?.company?.location}</p>
       </div>
       <div>
         <h1 className="font-bold text-lg my-2">{job?.title}</h1>
@@ -25,7 +25,7 @@ const LatestJobCards = ({ job }) => {
           {job?.jobType}
         </Badge>
         <Badge className={"text-[#7209b7] font-bold"} variant="ghost">
-          {job?.salary}LPA
+          ${job?.salary}
         </Badge>
       </div>
     </div>
