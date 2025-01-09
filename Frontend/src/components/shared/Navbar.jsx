@@ -37,10 +37,13 @@ const Navbar = () => {
   };
 
   return (
-    <div className="shadow-md top-0 z-50 bg-white">
+    <div className="sticky shadow-md top-0 z-50 bg-white">
       <div className="flex items-center justify-between mx-auto max-w-7xl h-16">
-        <div className="cursor-pointer">
-          <h1 className="text-2xl font-bold" onClick={() => navigate("/")}>
+        <div>
+          <h1
+            className="text-3xl  text-black font-bold"
+            onClick={() => navigate("/")}
+          >
             Career<span className="text-[#6A38C2]">Hive</span>
           </h1>
         </div>
@@ -57,13 +60,13 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <li>
+                <li className="text-black hover:text-purple-800">
                   <Link to="/">Home</Link>
                 </li>
-                <li>
+                <li className="text-black hover:text-purple-800">
                   <Link to="/jobs">Jobs</Link>
                 </li>
-                <li>
+                <li className="text-black hover:text-purple-800">
                   <Link to="/browse">Browse</Link>
                 </li>
               </>
@@ -72,11 +75,16 @@ const Navbar = () => {
           {!user ? (
             <div className="flex items-center gap-2">
               <Link to="/login">
-                <Button variant="outline">Login</Button>
+                <Button className="bg-gray-800 text-white hover:bg-[#6A38C2] hover:text-white">
+                  Login
+                </Button>
               </Link>
               <Link to="/signup">
-                <Button className="bg-[#6A38C2] hover:bg-[#5b30a6]">
-                  Signup
+                <Button
+                  className="bg-gray-800 text-white hover:bg-[#6A38C2] hover:text-white"
+                  variant="outline"
+                >
+                  Sign Up
                 </Button>
               </Link>
             </div>
@@ -93,13 +101,7 @@ const Navbar = () => {
               <PopoverContent className="w-80">
                 <div className="">
                   <div className="flex gap-2 space-y-2">
-                    <Avatar
-                      className="cursor-pointer
-                      h-8
-                      w-8
-                      border-rounded-full
-                      border-gray-500 "
-                    >
+                    <Avatar className="cursor-pointer">
                       <AvatarImage
                         src={user?.profile?.profilePhoto}
                         alt="@shadcn"

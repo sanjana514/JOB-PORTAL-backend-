@@ -3,12 +3,66 @@ import React from "react";
 const Footer = () => {
   return (
     // Footer will be a constant size and will be at the bottom of the page
-    <footer className="border-t border-t-gray-400 py-8 bg-white shadow dark:bg-gray-900 m-4">
+    <footer className="py-8 bg-purple-100 shadow dark:bg-gray-900 m-4">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <h2 className="text-xl font-bold">Job Hunt</h2>
-            <p className="text-sm">© 2024 Your Company. All rights reserved.</p>
+            <p className="text-x font-bold mt-4">For Job Seekers</p>
+            <p>
+              Discover your dream job with ease. Whether you're a student
+              looking for internships or a fresh graduate searching for your
+              first job.<br></br>
+              Our platform connects you with top employers worldwide.
+            </p>
+            <p className="text-x font-bold mt-4">For Recruiters</p>
+            <p>
+              Hire the right talent effortlessly.Post jobs, find qualified
+              candidates, and build your dream team in no time.
+            </p>
+            <p className="text-x font-bold mt-4">Resources</p>
+            <p>
+              Stay updated with career tips, success stories, and the latest
+              industry trends. Explore our blog, access exclusive resources,
+              <br></br>and join our growing community of professionals.
+            </p>
+            <p className="text-x font-bold mt-4">About Us</p>
+            <p>
+              We're dedicated to bridging the gap between aspiring job seekers
+              and forward-thinking employers.
+              <br></br>Learn more about our mission, our team, and how we're
+              making an impact in the job market.
+            </p>
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-x font-bold mt-6">Quick Links</p>
+                <ul className="mt-2">Home</ul>
+                <ul className="mt-2">Job Listings</ul>
+                <ul className="mt-2">Register/Login</ul>
+                <ul className="mt-2">Contact Us</ul>
+                <ul className="mt-2">FAQs</ul>
+                <ul className="mt-2">Privacy Policy</ul>
+              </div>
+              <div>
+                <p className="text-x font-bold mt-4">Legal</p>
+                <ul className="mt-2 ">Terms of Service</ul>
+                <ul className="mt-2 ">Privacy Policy</ul>
+                <ul className="mt-2 ">Cookie Settings</ul>
+                <ul className="mt-2 ">Accessibility</ul>
+              </div>
+              <div>
+                <p className="text-x font-bold mt-4">Contact Information</p>
+                <ul className="mt-2">Address (Company/Office location)</ul>
+                <ul className="mt-2">Email</ul>
+                <ul className="mt-2">Phone number</ul>
+                <ul className="mt-2">
+                  Social media links (LinkedIn, Facebook, Twitter)
+                </ul>
+              </div>
+            </div>
+            <p className="text-sm mt-8">
+              © 2024 Your Company. All rights reserved.
+            </p>
           </div>
 
           <div className="flex space-x-4 mt-4 md:mt-0">
