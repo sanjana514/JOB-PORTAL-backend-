@@ -26,7 +26,7 @@ const HeroSection = () => {
           <span className="text-[#6A38C2]">Dream Jobs</span>
         </h1>
         <div
-          className="flex w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto hover:ring-2 hover:ring-purple-500
+          className="flex w-[40%] shadow-lg pl-3 rounded-full items-center gap-4 mx-auto hover:ring-2 hover:ring-purple-500
         "
         >
           <input
@@ -37,7 +37,7 @@ const HeroSection = () => {
           />
           <Button
             onClick={searchJobHandler}
-            className="rounded-r-full bg-[#6A38C2]"
+            className="rounded-r-full bg-purple-500"
           >
             <Search className="h-5 w-5" />
           </Button>
