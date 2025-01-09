@@ -66,7 +66,7 @@ const Login = () => {
     }
   }, []);
   return (
-    <div flex flex-col h-screen justify-between>
+    <div>
       <Navbar />
       <div className="flex items-center justify-center max-w-7xl mx-auto">
         <form
@@ -95,7 +95,7 @@ const Login = () => {
               placeholder="patel@gmail.com"
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center">
             <RadioGroup className="flex items-center gap-4 my-5">
               <div className="flex items-center space-x-2">
                 <Input
