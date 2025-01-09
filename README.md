@@ -56,5 +56,3 @@ This is a full-stack job portal application built using the MERN (MongoDB, Expre
 - Node.js (>= 16.0.0)
 - npm or Yarn
 - MongoDB instance
-
----
