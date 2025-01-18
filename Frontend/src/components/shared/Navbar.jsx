@@ -69,6 +69,9 @@ const Navbar = () => {
                 <li className="text-black hover:text-purple-800">
                   <Link to="/browse">Browse</Link>
                 </li>
+                <li className="text-black hover:text-purple-800">
+                  <Link to="/aboutus">About Us</Link>
+                </li>
               </>
             )}
           </ul>
