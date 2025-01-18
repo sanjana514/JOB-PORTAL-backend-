@@ -167,7 +167,7 @@ export const updateProfile = async (
     if (skills) {
       skillsArray = skills.split(",");
     }
-    const userId = req.id; // middleware authentication
+    const userId = req.cookies.userId; // middleware authentication
     let user = await User.findById(userId);
 
     if (!user) {
