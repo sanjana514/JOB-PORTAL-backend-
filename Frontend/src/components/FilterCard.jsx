@@ -21,8 +21,6 @@ const FilterCard = () => {
     dispatch(setSearchedQuery(industry));
   }, [industry]);
 
-  console.log("location:", location); // Log the selected value
-
   return (
     <div className="w-full bg-white p-3 rounded-md">
       <h1 className="font-bold text-lg">Filter Jobs</h1>
