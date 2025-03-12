@@ -6,7 +6,7 @@ This is a full-stack job portal application built using the MERN (MongoDB, Expre
 
 - **Frontend**
 
-  - Built with React.js.
+  - Built with React.js
   - Implements Radix UI for a highly customizable and accessible component library.
   - State management with Redux Toolkit and persistence with `redux-persist`.
   - Animation support using Framer Motion and TailwindCSS animations.
